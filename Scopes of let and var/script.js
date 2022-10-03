@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        var printNumTwo;
+var printNumTwo;
         for(var i = 0; i < 3; i++) {
             if(i === 2) {
                 printNumTwo = function() {
@@ -28,7 +18,3 @@
         }
         console.log(printNumThree());
         console.log(j);
-        
-    </script>
-</body>
-</html>
