@@ -29,3 +29,21 @@ Content:
 * Use class Syntax to Define a Constructor Function
 
 * Use getters and setters to Control Access to an Object
+
+* Module Script creation
+
+* Reuse JavaScript Code Using import
+
+* Use * to Import Everything from a File
+
+* Create an Export Fallback with export default
+
+* Import a Default Export
+
+* Create a JavaScript Promise
+
+* Complete a Promise with resolve and reject
+
+* Handle a Fulfilled Promise with then
+
+* Handle a Rejected Promise with catch
