@@ -21,3 +21,11 @@ Content:
 * Use Destructuring Assignment to Assign Variables from Arrays
 
 * Create Strings using Template Literals
+
+* Write Concise Object Literal Declarations Using Object Property Shorthand
+
+* Write Concise Declarative Functions with ES6
+
+* Use class Syntax to Define a Constructor Function
+
+* Use getters and setters to Control Access to an Object
