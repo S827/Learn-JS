@@ -41,3 +41,15 @@ Content:
 * Match All Numbers
 
 * Match All Non-Numbers
+
+* Match Whitespace
+
+* Match Non-Whitespace Characters
+
+* Specify Upper and Lower Number of Matches
+
+* Specify Only the Lower Number of Matches
+
+* Specify Exact Number of Matches
+
+* Check for All or None

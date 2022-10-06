@@ -281,3 +281,124 @@ result = stre.match(nonRegEx);
 console.log(`result is ${result}`); //returns result is :, ,A, ,S,p,a,c,e, ,O,d,y,s,s,e,y
 result = result.length;
 console.log(`result is ${result}`); //reutrns result is 17
+
+// problems:
+
+let pString = "Oceans11";
+RegEx = /\w*/;
+console.log(pString.match(RegEx));
+
+// number at end only
+let numStr = "123phob";
+let numStr1 = "pho12b123";
+let numStr2 = "phob123";
+let reg = /[a-z][^0-9][a-z]/;
+console.log(numStr.match(reg));
+console.log(reg.test(numStr));
+console.log(numStr1.match(reg));
+console.log(reg.test(numStr1));
+console.log(numStr2.match(reg));
+console.log(reg.test(numStr2));
+
+
+// numbers allowed only at the end and no numbers in front and in between the chars.
+let numStr4 = "BadUs3rnam12";
+let reg1 = /\w/ig;
+console.log(reg1.test(numStr4));
+console.log(numStr4.match(reg1));
+
+// Match Whitespace
+// with \s we can match whitespaces .This pattern not only matches whitespace, but also carriage return, tab, form feed, and new line characters.
+//  \s similar to [ \r\t\f\n\v]
+// problem:
+x = "whitespace whitepace, whitespace   whi\ntespace";
+regex = /\s/g;
+console.log(x.match(regex)); //reutrns [' ', ' ', ' ', ' ', ' ', '\n']
+console.log(regex.test(x));
+console.log(`result is ${regex.test(y)}`); //reutrns false
+// Match Non-Whitespace Characters with \S similar to [^ \r\t\f\n\v]
+//prblem:
+regex = /\S/g;
+console.log(x.match(regex)); //reutrns (40) ['w', 'h', 'i', 't', 'e', 's', 'p', 'a', 'c', 'e', 'w', 'h', 'i', 't', 'e', 'p', 'a', 'c', 'e', ',', 'w', 'h', 'i', 't', 'e', 's', 'p', 'a', 'c', 'e', 'w', 'h', 'i', 't', 'e', 's', 'p', 'a', 'c', 'e']
+console.log(regex.test(x)); //reutrns true
+y = "abnbdnsadbjsadjajsdjksahdkjahs";
+console.log(regex.test(y));
+
+
+// Specify Upper and Lower Number of Matches
+//example:
+let a4 = "aaaah";
+let a2 = "aah";
+let a3 = "aaah"
+let a1 = "ah";
+let regex1 = /a{2,5}h/;
+console.log(a4.match(regex1));
+console.log(regex1.test(a4));
+console.log(a3.match(regex1));
+console.log(regex1.test(a3));
+console.log(a2.match(regex1));
+console.log(regex1.test(a2));
+console.log(a1.match(regex1));
+console.log(regex1.test(a1));
+
+// problem: Change the regex ohRegex to match the entire phrase Oh no only when it has 3 to 6 letter h's.
+let ohStr = "Ohhh no";
+let ohRegEx = /Oh{3,6} no/;
+console.log(ohStr.match(ohRegEx));
+
+
+// Specify Only the Lower Number of Matches
+// You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. 
+// Sometimes you only want to specify the lower number of patterns with no upper limit.
+// To only specify the lower number of patterns, keep the first number followed by a comma.
+// For example, to match only the string hah with the letter a appearing at least 3 times, your regex would be /ha{3,}h/.
+a4 = "haaaah";
+a2 = "haah";
+a3 = "haaah"
+let a100 = "h" + "a".repeat(100) + "h";
+regex = /ha{3,}h/;
+console.log(regex.test(a4))//true
+console.log(regex.test(a2))//false
+console.log(regex.test(a100))//true
+console.log(regex.test(a3))//true
+
+//problem: Change the regex haRegex to match the word Hazzah only when it has four or more letter z's.
+let haStr = "Hazzzzah";
+let hasStr1 = "Hazzzah"
+regex = /Haz{4,}ah/;
+console.log(regex.test(haStr)); //true
+console.log(regex.test(hasStr1)); //false
+regex = /Haz{3,}ah/;
+console.log(regex.test(hasStr1)); //true
+
+
+// Specify Exact Number of Matches with {n}
+// example:
+a4 = "haaaah";
+a3 = "haaah";
+a100 = "h" + "a".repeat(100) + "h";
+regex = /ha{3}h/;  //only 3 a's allowed between h and h, so haaah.
+console.log(regex.test(a4)); //false
+console.log(regex.test(a3)); //true
+console.log(regex.test(a100));//false
+
+//problem: Change the regex timRegex to match the word Timber only when it has four letter m's.
+let timStr = "Timmmmber";
+regex = /Tim{4}ber/;
+console.log(regex.test(timStr)); //true
+
+
+// Check for All or None
+//You can specify the possible existence of an element with a question mark, ?. This checks for zero or one of the preceding element. 
+// You can think of this symbol as saying the previous element is optional.
+//For example, there are slight differences in American and British English and you can use the question mark to match both spellings.
+let american = "color";
+let british = "colour";
+regex = /colou?r/;
+console.log(regex.test(american));//true
+console.log(regex.test(british));//true
+
+//problem: Change the regex favRegex to match both the American English (favorite) and the British English (favourite) version of the word.
+let favWord = "favorite";
+regex = /favou?rite/;
+console.log(regex.test(favWord)); //true
