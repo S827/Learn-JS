@@ -47,3 +47,5 @@ Content:
 * Handle a Fulfilled Promise with then
 
 * Handle a Rejected Promise with catch
+
+* Regular Expressions
