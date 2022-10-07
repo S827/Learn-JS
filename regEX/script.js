@@ -402,3 +402,53 @@ console.log(regex.test(british));//true
 let favWord = "favorite";
 regex = /favou?rite/;
 console.log(regex.test(favWord)); //true
+
+
+// Check For Mixed Grouping of Characters
+// If you want to find either Penguin or Pumpkin in a string, you can use the following Regular Expression: /P(engu|umpk)in/g
+// Fix the regex so that it checks for the names of Franklin Roosevelt or Eleanor Roosevelt in a case sensitive manner and it should make concessions for middle names.
+let myString = "Eleanor Roosevelt";
+let myRegex = /(Eleanor|Franklin|Franklin D.) Roosevelt/g; // Change this line
+result = myRegex.test(myString); // Change this line
+console.log(result);
+
+
+// Reuse Patterns Using Capture Groups
+/*
+Capture groups are constructed by enclosing the regex pattern to be captured in parentheses. In this case, 
+the goal is to capture a word consisting of alphanumeric characters so the capture group will be \w+ enclosed by parentheses: /(\w+)/.
+The substring matched by the group is saved to a temporary "variable", which can be accessed within the same regex using 
+a backslash and the number of the capture group (e.g. \1). 
+Capture groups are automatically numbered by the position of their opening parentheses (left to right), starting at 1.
+*/
+let repeatStr = "row row row your boat";
+regex = /(\w+) \1 \1/; //matches a word that occurs thrice separated by spaces: with(\w+) a group of char formed.
+console.log(regex.test(repeatStr));
+console.log(repeatStr.match(regex));
+
+// Use capture groups in reRegex to match a string that consists of only the same number repeated exactly three times separated by single spaces.
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+) \1 \1$/; // Change this line ^ and $ fixed the total num of groups.
+result = reRegex.test(repeatNum);
+console.log(result);
+
+// Use Capture Groups to Search and Replace
+// search and replace text in a string using .replace() on a string. The inputs for .replace() is first the regex pattern you want to search for.
+//  The second parameter is the string to replace the match or a function to do something.
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+console.log(wrongText.replace(silverRegex, "blue"));//the sky is blue
+
+// Write a regex fixRegex using three capture groups that will search for each word in the string one two three. Then update the replaceText variable to replace one two three with the string three two one and assign the result to the result variable. 
+// Make sure you are utilizing capture groups in the replacement string using the dollar sign ($) syntax.
+// str = "one two three";
+let fixRegex = /(\w+)\s(\w+)\s(\w+)/; // Change this line
+let replaceText = "$3 $2 $1"; // Change this line
+result = str.replace(fixRegex, replaceText);
+console.log(result); //three two one
+
+// Remove Whitespace from Start and End
+let hello = "   Hello, World!  ";
+let wsRegex = /^\s+|\s+$|\s+(?=\s)/g; // Change this line
+result = hello.replace(wsRegex, ''); // Change this line
+console.log(result);

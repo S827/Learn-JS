@@ -49,9 +49,9 @@ console.log(e.test("9"));//true single number start to end that is why returned 
 // ?:
 console.log(/a?/.test(""));//true matches empty string as ? stand o or 1
 console.log(/a?/.test("a"));//true one match
-console.log(/a?/.test("b"));//true o match so still true
+console.log(/a?/.test("b"));//true 0 match so still true
 console.log(/a?/.test("aa"));//true 1 match and 2nd a is not part of the pattern
-console.log(/^a?$/.test("aa")); //false it looks 0 or 1 a start to end, but here we have another a so returned false
+console.log(/^a?$/.test("aa")); //false it looks 0 or 1 'a' start to end, but here we have another a so returned false
 
 // + :
 console.log(/a+/.test("a"));//true as it checks for 1 or more a's which is available in the string
@@ -160,3 +160,193 @@ console.log(e.test("ababa"));//true
 e = /a(?=b)/;
 console.log(e.test("babaa"));//true
 console.log(e.test("bbbbbba"));//false
+
+// (/w)(?!\1) looks fot a character without recurrence, but only for 1 character
+e = /^((\w)(?!\1))+$/;
+console.log(e.test("madam"))//false, regex doesnot work, because of \1 does not represent \w, it represents higher level bracket pair
+console.log(e.test("maam"));//false
+
+// ?: to forget the memory of brackets
+// Look for a character. Look ahead to ensure it is not followed by the same character. Do this from start to end for all characters.
+e = /^(?:(\w)(?!\1))+$/; //this time 1st level of () are not remembered because of '?:' hence \1 remembers the match returned by \w
+console.log(e.test("madam")); //true  '+' added for overall grouping to find similar pairs of chars end to end
+console.log(e.test("maam")); //false
+
+/*
+Review
+\w represents all the alpha-numeric characters
+If you capitalize ‘w’ and use \W', that would mean all characters other than alpha-numeric
+( )
+The expression within a bracket is remembered for later use
+\1 remembers and uses the match from first expression that is within brackets
+\2 from second set of brackets. And so on.
+a(?!b)
+A combination of brackets, question mark and exclamation mark (?!), is called a look ahead
+This matches a only if it is not followed by b
+a(?=b)
+The other side of the coin
+Match a only if it is followed by b. (?:a)
+Forgetful grouping
+Look for a but don’t remember it
+You can’t use \1 pattern to reuse this match
+*/
+
+// Alternating Sequence like abababab, ioioioio, *7*7*7*7 etc.
+e = /^(\S)(?!\1)(\S)(\1\2)*$/; //^ start, $ end, \S anything other than white space,?!\1 \S is remembered as \1 
+// and next char shouldnt be \1, then next char other then whitespace \S and remembered as \2, now the patter should be \1\2, 
+// with * pattern became \1\2\1\2\1\2....
+console.log(e.test("ababab"));//true a:\1 b:\2  \1\2\1\2 format is allowed only
+console.log(e.test(" a a"));//false as it contains whitespace
+console.log(e.test("babba"));//false as patters \1\2\1\2 does not fit
+console.log(e.test(".g.g"));//true
+console.log(e.test("xyxyx"));//false as current patters is \1\2\1\2 and in this example, pattern is something like this \1\2\1\2...\1 ends with the first remembered character
+e = /^(\S)(?!\1)(\S)(\1\2)*\1?$/;
+// question mark ? after a character or pattern means 0 or 1 match for the preceding pattern. It is non-greedy in gobbling up characters.
+console.log(e.test("abababa"));//true
+console.log(e.test("xyxyx"));//true
+
+e = /^(\S)(?!\1)(\S)(?!\1\2)(\S)(\1\2\3)*$/; //here it looks for pattern \1\2\3 at start and end, no other chars in between is allowed
+console.log(e.test("abcabcabc"));//true
+console.log(e.test("abcab"));//false
+// here we want to match with string "abcabcabcab" means \1\2 should be in the last
+e = /^(\S)(?!\1)(\S)(?!\1\2)(\S)(\1\2\3)*\1\2?$/;
+// question mark ? after a character or pattern means 0 or 1 match for the preceding pattern. It is non-greedy in gobbling up characters.
+console.log(e.test("abcabcabcab")); //true
+console.log(e.test("abcabca"));//false as ending is not \1\2 and is \1 only.
+
+e = /a?/;
+console.log(e.test("a"));//true
+console.log(e.test(""));//true
+console.log(e.test("bb"));//true
+console.log(e.test("ab"));
+
+
+/*
+Review
+\S
+Represents all characters excluding white space such as a space and new lines
+Note that it is capital S
+a*
+The asterisk or star, looks for 0 or more occurrences of the preceding character. In this case, it is 0 or more a
+Remember plus (+) which looks for 1 or more? Yeah, these guys are cousins.
+a(?!b)
+This combination of brackets, question mark and exclamation mark (?!) is called a look ahead.
+This matches a only if it is not followed by b.
+For example, it matches a in aa, ax, a$ but does not match ab
+Though it uses bracket, it does not remember the matching character after a.
+\s
+Small caps s matches a single white space character such as a space or new line.
+a(?=b)
+This matches a that is followed by b.
+^ab*$
+You may think this translates to 0 or more occurrences of ab, but it matches a followed by 0 or more b
+For example: This matches abbb, aand ab, but does not match abab
+^(ab)*$
+This matches 0 or more pairs of ab
+That means it will match empty string "", aband abab, but not abb
+a?
+? matches 0 or 1 occurrence of preceding character or pattern
+\1? matches 0 or 1 recurrence of first remembered match
+*/
+
+
+/*
+Match a strong password
+The password should:
+
+have a minimum of 4 characters
+contain lowercase
+contain uppercase
+contain a number
+contain a symbol
+*/
+// length of the string
+//espression with just lookahead
+// won't consume any character
+e = /^(?=.{4,})$/;
+console.log(e.test("abcd")); //false, pattern didnt work
+// analysis: ?=  lookahead, it does not consume any character
+// .  any char
+//  {4,} means at least 4 preceding chars with no max limit
+//  \d{4} means 4 numbers
+// \w{4,20} means any alphanumeric char with at least 4 char and max 20 chars.
+
+// after lookahead
+//  pattern to consume character is needed
+// It reads like this, “Start from the beginning. Look ahead for 4 characters. 
+// Don’t remember the match. Come back to the beginning. Consume all the characters using .* and see if you reach the end of the string.”
+e = /^(?=.{4,}).*$/;
+console.log(e.test("abcd"));//true
+console.log(e.test("abc"));//false
+console.log(e.test("abcde"));//true
+
+// AT LEAST ONE NUMBER
+e = /^(?=.*\d+).*$/;
+//pattern explaination: ^: start, ?=.*: look ahead for 0 or more chars, \d+: check 1 or more number follows. Once it matches,
+// come back to the start bc we were in look ahead. With .*$ consume all the chars in the string untile the end of the string.
+console.log(e.test("4"));//true
+console.log(e.test("4a4"));//true
+console.log(e.test("ert"));//false
+console.log(e.test("eleph7ant"));//true
+
+// ATLEAST ONE LOWERCASE LETTERS
+e = /^(?=.*[a-z]+).*$/ //?=.*: lookahead for any chars, [a-z]+: one or more lower case letters, come back at the start bc of lookahead, with .* consume all the chars int he string until end of the string.
+console.log(e.test("ABcAB"));//true
+console.log(e.test("ABABAB"));//false
+console.log(e.test("32423"));//false
+console.log(e.test("21321n34321"));//true
+console.log(e.test("AJSAJSkjasAKAsad"));//true
+
+// ONE UPPERCASE LETTER
+e = /^(?=.*[A-Z]+).*$/;
+console.log(e.test("aBcab"));//true
+console.log(e.test("ABABAB"));//true
+console.log(e.test("32423"));//false
+console.log(e.test("21321N34321"));//true
+console.log(e.test("AJSAJSkjasAKAsad"));//true
+
+
+// AT LEAST ONE SYMBOL
+e = /^(?=.*[^a-zA-Z0-9])[ -~]+$/; //considers space as symbol
+console.log(e.test("_"));//true
+console.log(e.test(" "));//true
+
+e = /^(?=.*[^a-zA-Z0-9])[!-~]+$/; //does not take space
+console.log(e.test("_"));//true
+console.log(e.test(" "));//false
+
+e = /^(?=.*[\W])[!-~]+$/; //underscore exception
+console.log(e.test("_"));//false
+console.log(e.test(" "));//false
+
+// [!-~] : Charset range: it covers all the symbols, letters and numbers we need.
+let passwordRegEx = /^(?=.{4,})(?=.*\d+)(?=.*[a-z]+)(?=.*[A-Z]+)(?=.*\W)[!-~]$/;
+console.log(passwordRegEx.test("abc123"));
+console.log(passwordRegEx.test("nameaB3$"));
+console.log(passwordRegEx.test("#kK8"));
+console.log(passwordRegEx.test("no89Name*"));
+console.log(passwordRegEx.test("LlLl9)"));
+
+
+
+// apttern to find 2 consecutive numbers
+e = /^(?=.*\d\1).*$/;
+console.log(e.test("22"));
+
+
+// Use lookaheads in the pwRegex to match passwords that are greater than 5 characters long, and have two consecutive digits.
+let sampleWord = "astronaut12";
+/* 
+Your regex should use two positive lookaheads.
+Passed:Your regex should not match the string astronaut
+Passed:Your regex should not match the string banan1
+Passed:Your regex should match the string bana12
+Passed:Your regex should match the string abc123
+Passed:Your regex should not match the string 12345
+Passed:Your regex should match the string 8pass99
+Passed:Your regex should not match the string 1a2bcde
+Passed:Your regex should match the string astr1on11aut
+*/
+let pwRegex = /(^(?=.{5,})(?=.*\D\d{2,}).*$)/; // Change this line
+let result = pwRegex.test(sampleWord);
+console.log(result);//true

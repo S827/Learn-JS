@@ -53,3 +53,9 @@ Content:
 * Specify Exact Number of Matches
 
 * Check for All or None
+
+* Reuse Patterns Using Capture Groups
+
+* Use Capture Groups to Search and Replace
+
+* Remove Whitespace from Start and End
