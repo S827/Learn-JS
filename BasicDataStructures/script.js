@@ -20,6 +20,7 @@ function popShift(arr){
     return [shifted, popped];
 }
 console.log(popShift(simpleArray));//['start', 'last']
+console.log(simpleArray);
 
 
 // Remove Items Using splice()
