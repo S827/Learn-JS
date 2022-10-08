@@ -130,3 +130,122 @@ console.log(filteredArray([[10, 8, 3], [14, 6, 23], [3, 18, 6]], 18));
 console.log(filteredArray([["trumpets", 2], ["flutes", 4], ["saxophones", 2]], 2));
 console.log(filteredArray([["amy", "beth", "sam"], ["dave", "sean", "peter"]], "peter"));
 
+// Add Key-Value Pairs to JavaScript Objects
+const tekkenCharacter = {
+    player: 'eto',
+    playingStyle: opener,
+    bowler: true
+};
+// add 2 more properties and their value
+tekkenCharacter.origin = "india";
+tekkenCharacter['hair color'] = 'black';
+tekkenCharacter['skin color'] = 'brown';
+console.log(tekkenCharacter);
+/*
+{player: 'eto', playingStyle: null, bowler: true, origin: 'india', hair color: 'black', …}
+*/
+
+
+// /Modify an Object Nested Within an Object
+let anObject = {
+    id: 827,
+    name: 'eto',
+    dob: '18-02-1991',
+    languagesKnown: {
+        java: 23,
+        python: 78,
+        javaScript: 57,
+        ruby: 12
+    }
+}
+// here the ruby count is wrong, we need to chnage it to 22
+anObject.languagesKnown.ruby = 22;
+console.log(anObject.languagesKnown.ruby); //22
+
+// Use the delete Keyword to Remove Object Properties
+delete anObject.languagesKnown;
+console.log(anObject); //{id: 827, name: 'eto', dob: '18-02-1991'}
+
+
+// Check if an Object has a Property
+//  with hasOwnProperty() and in method
+console.log(anObject.hasOwnProperty("id"));//true
+console.log('dob' in anObject); //true
+console.log('languagesKnown' in anObject);//false
+
+
+// Iterate Through the Keys of an Object with a for...in Statement
+let user123 = {
+    amit: 1,
+    eto: 2, 
+    salvi: 3
+}
+for(let user in user123){
+    console.log(user); // amit   eto salvi
+    console.log(user123.user); //undefined
+    console.log(user123[user]);//1 2 and 3 use of bracket property gave correct results insted of dot notation property above, returned undefined
+}
+
+// Generate an Array of All Object Keys with Object.keys()
+let users = {
+    Alan: {
+      age: 27,
+      online: false
+    },
+    Jeff: {
+      age: 32,
+      online: true
+    },
+    Sarah: {
+      age: 48,
+      online: false
+    },
+    Ryan: {
+      age: 19,
+      online: true
+    }
+  };
+  
+  function getArrayOfUsers(obj) {
+    // Only change code below this line
+    let x = Object.keys(obj);
+    return x;
+    // Only change code above this line
+  }
+  
+  console.log(getArrayOfUsers(users)); //['Alan', 'Jeff', 'Sarah', 'Ryan']
+
+
+//   Modify an Array Stored in an Object
+/*
+The user object contains three keys. The data key contains five keys, one of which contains an array of friends. 
+From this, you can see how flexible objects are as data structures. We've started writing a function addFriend. 
+Finish writing it so that it takes a user object and adds the name of the friend argument to the array stored in 
+user.data.friends and returns that array.
+*/
+let user = {
+    name: 'eto',
+    age: 31,
+    data: {
+        userName: 'etosvn',
+        joinDate: 'March 12, 2022',
+        organization: 'ETOSVN',
+        friends: [
+            'abc',
+            'bcd',
+            'cde'
+        ],
+        location: {
+            city: 'kolkata',
+            state: 'wb',
+            country: 'India'
+        }
+    }
+};
+function addFriend(userObj, name){
+// need to add a new friend in friends array and return it
+    user.data.friends.push(name);
+    return user.data.friends;
+}
+
+console.log(addFriend(user, 'Pete')); //['abc', 'bcd', 'cde', 'Pete']
