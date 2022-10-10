@@ -18,17 +18,17 @@ You may need to turn the string into an array before you can reverse it.
 Your result must be a string.
 */
 function reverseString(str){
-    let x = str.split('');
+    let x = str.split(''); //string converted into array of literals
     let a = [];
     console.log(x);
     for(let i = 0; i < x.length; i++) {
-        let y = x.pop();
-        a.push(y);
-        i--;
+        let y = x.pop();//pop out the last element of array and store it in y
+        a.push(y);//push y into array a
+        i--;//need to work to make it simple
         console.log(y);
         console.log(a);
     }
-    str = [...a];
+    str = [...a];// str copies from a
     return str.join('');
 }
 

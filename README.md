@@ -49,3 +49,9 @@ Content:
 * Handle a Rejected Promise with catch
 
 * Regular Expressions
+
+* Basic Data Structure
+
+* Basic Algorithm Scripting
+
+* Object-Oriented programming
