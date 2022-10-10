@@ -357,3 +357,81 @@ function getIndexToIns(arr, num) {
   console.log(getIndexToIns([10, 20, 30, 40, 50], 30));//2
   console.log(getIndexToIns([5, 3, 20, 3], 5));//2
   console.log(getIndexToIns([2, 5, 10], 15));//3
+
+
+//   Mutations
+/*
+Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array.
+For example, ["hello", "Hello"], should return true because all of the letters in the second string are present in the first, ignoring case.
+The arguments ["hello", "hey"] should return false because the string hello does not contain a y.
+Lastly, ["Alien", "line"], should return true because all of the letters in line are present in Alien.
+*/
+
+
+function mutation(arr) {
+    let c = 0;let x = []; let y = []; let match = false;
+  
+      y = arr[1].split('');//convert array element into an array of literals
+      // console.log(y);
+      x = arr[0].split('');//convert array element into an array of literals
+      // console.log(x);
+      for(let a = 0; a < y.length; a++){//outer loop for 2nd array element, it will run for y.length -1 times
+        match = false;    //reset the match status when out of inner loop
+        for(let b = 0; b < x.length && !match; b++){ //access only when index is less then array length and false status of match
+          if(y[a].toLowerCase() === x[b].toLowerCase()){//check if y's element is in x's
+            c++;                                        //increment c when match is found
+            match = true;                                  //set match to true as match is found and no need to run inner loop anymore
+            if(c === y.length){                         //if c equals y.length it means it has checked all the items or jus tlast one checking
+              return true;                              //if c equals y.length return true as all y's element in x's
+                }
+            } else if(c === 0 && b === (x.length - 1)){ //if it doesn't matches check if c is 0 and inner loop has ran the max num of times which implicates y's element is not in x's
+               return false;
+            } else{                                      
+              if(a === (y.length - 1) && b === (x.length - 1)){ //if outer and inner loop has ran max times
+                if(c < y.length){                                  // and c is less than total element of y's, means y's element is not in x's
+                  return false;               
+                } else return true;                     //
+              } else continue;
+            }
+          } 
+        } 
+  }
+  console.log(mutation(["hello", "neo"]));
+  console.log(mutation(["Mary", "Army"]));
+  console.log(mutation(["hello", "hey"]));
+  console.log(mutation(["hello", "Hello"]));
+  
+
+
+/*
+Write a function that splits an array (first argument) into groups the length of size (second argument) 
+and returns them as a two-dimensional array.  
+*/
+  function chunkArrayInGroups(arr, size){
+    let mainArr = [];
+    let len = arr.length / size; //to calucalte fow many times loop should run, which should be equal to total number of inner arrays
+    for(let i = 0; i < len; i++){
+        let arr2 = arr.splice(0, size);//remove the part of array from start and store it in arr2 
+        mainArr.push(arr2); // push arr2 in mainArr at the end
+    }
+    return mainArr;
+  }
+  console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+  console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3));
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2));
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4));
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3));
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4));
+console.log(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2));
+
+//   let mainArr = [];
+//   let arr1 = [1, 2, 3, 4, 5, 6];
+//   let len = 2;
+//   let arr2 = arr1.splice(0, len);
+//   console.log(arr1);//[3,4,5,6]
+//   console.log(arr2);  //[1,2]
+//   mainArr.push(arr2);
+//   console.log(mainArr);
+//   arr2 = arr1.splice(0, len);
+//   mainArr.push(arr2);
+//   console.log(mainArr);
