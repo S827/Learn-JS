@@ -23,3 +23,11 @@ Contents:
 * Understand Where an Object’s Prototype Comes From
 
 * Use Inheritance So You Don't Repeat Yourself
+
+* Inherit Behaviors from a Supertype
+
+* Set the Child's Prototype to an Instance of the Parent
+
+* Reset an Inherited Constructor Property
+
+* Add Methods After Inheritance

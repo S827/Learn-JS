@@ -182,3 +182,143 @@ BirdSpecies.prototype = {
         console.log('hfff');
     }
 }
+
+// Inherit Behaviors from a Supertype//inheritance
+function BirdSpecies(){ }
+BirdSpecies.prototype = {
+    constructor: BirdSpecies,
+    eat: function(){
+        console.log('hfff');
+    }
+}
+let Ostrich = new BirdSpecies();//creates instance of BirdSpecies
+// there are some disadvantages with above approach
+// alternative approach
+Ostrich.prototype = Object.create(BirdSpecies.prototype);
+// Obejct.create creates new object sets obj as the new object's prototype.
+// by setting the prototype of ostrich to be the prototype of BirdSpecies, we are 
+// effectively giving the ostrich instance the same recipe as any other instance 
+// of BirdSpecies
+
+
+
+// Set the Child's Prototype to an Instance of the Parent
+// Above ostrich inheriting behavior from the supertype BirdSpecies: making a new instance of BirdSpecies
+// now we can create objects using Ostrich which inherits from BirdSpecies
+// let ostrichBaby1 = new Ostrich('osi');//produces error of undefined settings 'constructor'
+
+
+// Reset an Inherited Constructor Property
+// by inehriting prototype of BirdSpecies in Ostrich, it also inherit same constructor
+// property, currently constructor of ostrich is BirdSpecies
+// set constructor peoperty to the inherited instances of supertype
+let Insects = new BirdSpecies();
+Insects.prototype = Object.create(BirdSpecies.prototype);
+Ostrich.prototype.constructor = Ostrich;
+Insects.prototype.constructor = Insects;
+
+
+// Add Methods After Inheritance
+// currently Ostrich and Insects inherits BirdSpecies properties and functions
+// and we can add methods to respective objects
+Ostrich.prototype.fly = function(){
+    console.log('fly fly fly');
+};
+// now ostrich has fly and eat function(which was inherited from BirdSpecies)
+Insects.prototype.crawl = function(){console.log('crawl....');};
+Ostrich.eat();
+// Ostrich.fly();
+Insects.eat();
+// Insects.crawl();
+
+function Animal() { }
+Animal.prototype.eat = function() { console.log("nom nom nom"); };
+
+function Dog() { }
+
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.bark = function(){
+  console.log('Woof!');
+}
+
+beagle = new Dog();
+beagle.eat();
+beagle.bark();
+
+// Override inherited methods
+function Human(){ }
+Human.prototype.greet = function(){return `Hello!`;};
+
+function Woman(){ }
+Woman.prototype = Object.create(Human.prototype);
+Woman.prototype.constructor = Woman;
+Woman.prototype.greet = function(){return `Namaste!`;};
+
+let hema = new Woman();
+console.log(hema.greet()); //Namaste! instead of Hello! as method was overrided by its childObject
+
+
+// Use a Mixin to Add Common Behavior Between Unrelated Objects
+// Create a mixin named glideMixin that defines a method named glide. 
+// Then use the glideMixin to give both bird and boat the ability to glide.
+let bird = {
+    name: 'lui',
+    numLegs: 2
+};
+let boat = {
+    name: 'tera',
+    type: 'yacht'
+};
+
+let glideMixin = function(obj){
+    obj.glide = function(){
+        console.log(`gliding!`);
+    }
+};
+glideMixin(bird);
+glideMixin(boat);
+bird.glide();//gliding!
+boat.glide();//gliding!
+
+
+
+// Use Closure to Protect Properties Within an Object from Being Modified Externally
+// in prev, bird has public property name, we need to make it private
+// Change how weight is declared in the Bird function so it is a private variable. 
+// Then, create a method getWeight that returns the value of weight 15.
+
+function Bird() {
+    let count = 15;
+    this.displayCount = function(){
+        console.log(count);
+    }
+}
+// Bird.displayCount();
+
+// Understand the Immediately Invoked Function Expression (IIFE)
+// anonymous function which execute immediately
+(function(){
+    for(i=0; i< 3; i++){
+        console.log(`hi${i}`);
+    }
+})();  //outputs hi0 hi1 and hi2
+
+
+// Use an IIFE to Create a Module
+// Create a module named funModule to wrap the two mixins isCuteMixin 
+// and singMixin. funModule should return an object.
+let funModule = (function(){
+    return {
+        funMixin : function(obj){
+            obj.isSweet = function(){
+                return true;
+            };
+        },
+        cryMixin : function(obj){
+            obj.isCrying = function(){
+                return false;
+            };
+        }
+    }
+})
