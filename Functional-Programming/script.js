@@ -53,3 +53,65 @@ ${getTeas(prepareCoffee, 45)}`);
 /*returns GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA,GREEN TEA****
 BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA,BLACK TEA**************
 NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE,NESCAFE */
+
+// Return Part of an Array Using the slice Method
+const array = ['never', 'give', 'up', 'bitches','try', 'hard'];
+function sliceArray(array, startIndex, endIndex){
+    let x = array.slice(startIndex, endIndex);
+    return x;
+}
+const myArr = sliceArray(array, 2, 4);
+console.log(myArr);//['up', 'bitches'];
+console.log(sliceArray([0,1,2,3,4,5,6,7,8,9,10,11,12,12,13,14,15], 2, 10));
+//[2, 3, 4, 5, 6, 7, 8, 9]
+
+// Remove Elements from an Array Using slice Instead of splice
+function nonMutating(citiesName){
+    const x = citiesName.slice(0, 3);
+    return x;
+}
+let y = nonMutating(array);
+console.log(y);//['never', 'give', 'up']
+console.log(array);//['never', 'give', 'up', 'bitches', 'try', 'hard']
+
+// Combine Two Arrays Using the concat Method
+function nonMutatingConcat(before, after){
+    return before.concat(after);
+}
+const arr11 = [1,2,3,4,5];
+const arr2 = [11,12,13,14,15];
+console.log(nonMutatingConcat(arr11, arr2));//[1, 2, 3, 4, 5, 11, 12, 13, 14, 15]
+console.log(arr11);//[1, 2, 3, 4, 5]
+console.log(arr2);//[11,12,13,14,15]
+
+// Add Elements to the End of an Array Using concat Instead of push to ignore mutation
+function nonMutatingPush(before, after){
+    return before.concat(after);
+    // return before.push(after);
+}
+const l1 = nonMutatingPush(array, arr11);
+console.log(l1);//['never', 'give', 'up', 'bitches', 'try', 'hard', 1, 2, 3, 4, 5]
+
+
+// Split a String into an Array Using the split Method
+str = "hello world";
+console.log(str.split(' '));//['hello', 'world']
+console.log(str.split(/\s/));//['hello', 'world']
+str = "hello1world";
+console.log(str.split(/\d/));//['hello', 'world']
+
+// Use the split method inside the splitify function to split str into an array of words. 
+// The function should return the array
+function splitify(str){
+    return str.split(/\W/); //arrays separated with any chars but alphanumeric chars
+}
+console.log(splitify("Hello World,I-am code")); //['Hello', 'World', 'I', 'am', 'code']
+console.log(splitify("This.is.a-sentence"));//['This', 'is', 'a', 'sentence']
+
+
+// Combine an Array into a String Using the join Method
+const str12 = "-hello world-no,problem";
+const x2 = str12.split(/\W/);//returns array without any symbol chars and spaces
+const x3 = x2.join(' ');//returns string separated with spaces
+console.log(x3);//hello world no problem
+
