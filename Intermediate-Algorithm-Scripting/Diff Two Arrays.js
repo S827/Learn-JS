@@ -5,7 +5,28 @@
  * symmetric difference of the two arrays.
  * Note: You can return the array with its elements in any order.
  */
-
+/**
+ * check arr1 and arr2 items if it is equal or not
+ * store those array items which are not equal to any of the items and return it
+ * 
+ * Algorithm-1
+ * a function diffArray taking 2 parameters arr1 and arr2
+  * an empty array newArr
+  * loop arr1 items
+  *    check arr2 length if it is empty
+  *        if not empty, loop arr2 items
+  *            if arr1 item is equal to arr2 item
+  *                stop the operation and loop arr2 next item
+  *            if arr1 item is not equal to arr2 item
+  *                check if arr2 item is last, it means arr1 item is not found in arr2
+  *                    add arr1 item in the empty array newArr
+  *        if arr2 is empty
+  *            add arr1 item in the ampty array newArr
+  * 
+  * repeat the above for arr2 items
+  * 
+  * return array newArr
+ */                   
  function diffArray(arr1, arr2) {
   const newArr = [];
   for(let i = 0; i < arr1.length; i++){
@@ -48,3 +69,20 @@ console.log(diffArray(["snuffleupagus", "cookie monster", "elmo"],[]));
 console.log(diffArray([], ["snuffleupagus", "cookie monster", "elmo"]));
 console.log(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]));
 console.log(diffArray(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]));
+
+
+/**
+ * Algorithm-2
+ * Merge arr1 and arr2
+ * filter the items which are not repeated in the array
+ */
+// function uniqueItems(arr1, arr2){
+//   const newArr = [];
+//   const arr = arr1.concat(arr2);
+//   console.log(arr);//[1, 2, 4, 5, 1, 2, 3, 4, 5, 6]
+//   const fArr = arr.filter(item => arr.indexOf(item) === 0 );
+//   console.log(fArr);
+//   // newArr = [...fArr];
+//   return newArr;
+// }
+// uniqueItems([1,2,4,5],[1,2,3,4,5,6]);
