@@ -7,3 +7,5 @@ Contents:
 * Remove-Element-fromArray-nArgs.js
 
 * Spinal Tap Case
+
+* Sorted-Union.js
