@@ -13,3 +13,5 @@ Contents:
 * Convert HTML Entities
 
 * createFibonacciSeq.js
+
+* PrimeNumAndSum.js

@@ -62,4 +62,4 @@ function sumOfOddFibonacci(num){
 }
 console.log(sumOfOddFibonacci(10));
 console.log(sumOfOddFibonacci(100));
-console.log(sumOfOddFibonacci(4000000));
+// console.log(sumOfOddFibonacci(4000000));
