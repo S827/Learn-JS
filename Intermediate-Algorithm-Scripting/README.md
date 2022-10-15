@@ -9,3 +9,7 @@ Contents:
 * Spinal Tap Case
 
 * Sorted-Union.js
+
+* Convert HTML Entities
+
+* createFibonacciSeq.js
