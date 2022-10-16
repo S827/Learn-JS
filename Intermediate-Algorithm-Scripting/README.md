@@ -15,3 +15,13 @@ Contents:
 * createFibonacciSeq.js
 
 * PrimeNumAndSum.js
+
+* array-and-function-in-args.js
+
+* lotsOfNestedArrReturnArrWithLiterals.js
+
+* binary-decimal-ascii-.js
+
+* Check-If-falsy-property-objects-array.js
+
+* addOnlyNumCurrying.js
