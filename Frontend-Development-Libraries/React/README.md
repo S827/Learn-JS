@@ -106,3 +106,58 @@ class ParentComponent extends React.Component {
         )
     }
 }
+
+10. Use React to render nested components
+const TypesOfFruit = () => {
+    return (
+        <h2>Fruits:</h2>
+        <ul>
+            <li>Apple</li>
+            <li>Mango</li>
+            <li>Orange</li>
+        </ul>
+    )
+}
+const Fruits = () => {
+    return (
+        <div>
+            <TypesOfFruit />            functional componenet nested withing Fruits
+        </div>
+    );
+}
+
+class TypesOfFood extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>
+                <h1>Types of food: </h1>
+                <Fruits />              Fruits nested in TypesOfFood
+            </div>                    
+        )
+    }
+}
+TypesOfFood: Parent
+children of TypesOfFood is Fruits
+children of Fruits is TypesOfFruits functional component
+we can say TypesOfFruit is grand children of TypesOfFood
+
+11.Write a React Component from Scratch
+
+class MyComponent extends React.Component {
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return(
+                    <div>
+                        <h1>My First Component!</h1>
+                    </div>
+                );
+            };
+        }
+        ReactDOM.render(<MyComponent />,  document.getElementById("well"));
+
+12.
